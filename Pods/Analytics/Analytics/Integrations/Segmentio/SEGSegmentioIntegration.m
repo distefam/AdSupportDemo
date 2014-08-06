@@ -20,9 +20,6 @@ NSString *const SEGSegmentioDidSendRequestNotification = @"SegmentioDidSendReque
 NSString *const SEGSegmentioRequestDidSucceedNotification = @"SegmentioRequestDidSucceed";
 NSString *const SEGSegmentioRequestDidFailNotification = @"SegmentioRequestDidFail";
 
-// Test B
-//NSString *const SEGAdvertisingClassIdentifier = @"ASIdentifierManager";
-
 static NSString *GenerateUUIDString() {
   CFUUIDRef theUUID = CFUUIDCreate(NULL);
   NSString *UUIDString = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, theUUID);
@@ -63,6 +60,7 @@ static NSString *GetIdForAdvertiser() {
 }
 
 // Test B
+//NSString *const SEGAdvertisingClassIdentifier = @"ASIdentifierManager";
 //static NSString *GetIdForAdvertiser() {
 //    Class advertisingClass = NSClassFromString(SEGAdvertisingClassIdentifier);
 //    if (advertisingClass) {
