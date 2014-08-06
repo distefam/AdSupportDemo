@@ -1,6 +1,6 @@
 ### Abstract
 
-This is a demo project to illustrate that the AdSupport Framework is automatically linked whenever classes referenced therein are explicitly called. Specifically, `[ASIdentifierManager class]`. If, however, these calls are replaced with anonymous classes by using `NSClassFromString()`, the AdSupport Framework is not automatically linked.
+This is a demo project to illustrate that the AdSupport Framework is automatically linked whenever classes referenced therein are explicitly called. Specifically, `[ASIdentifierManager class]`. If, however, these calls are replaced with obfuscated classes by using `NSClassFromString()`, the AdSupport Framework is not automatically linked.
 
 ### Usage
 
