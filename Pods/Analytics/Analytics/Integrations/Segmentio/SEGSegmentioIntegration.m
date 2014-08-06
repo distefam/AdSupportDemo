@@ -16,9 +16,13 @@
 #import <iAd/iAd.h>
 #import <AdSupport/AdSupport.h>
 
+#define kSEGUseObfuscatedClassAccessor 0
+
 NSString *const SEGSegmentioDidSendRequestNotification = @"SegmentioDidSendRequest";
 NSString *const SEGSegmentioRequestDidSucceedNotification = @"SegmentioRequestDidSucceed";
 NSString *const SEGSegmentioRequestDidFailNotification = @"SegmentioRequestDidFail";
+
+NSString *const SEGAdvertisingClassIdentifier = @"ASIdentifierManager";
 
 static NSString *GenerateUUIDString() {
   CFUUIDRef theUUID = CFUUIDCreate(NULL);
@@ -50,7 +54,19 @@ static NSString *GetDeviceModel() {
   return results;
 }
 
-// Test A
+#if kSEGUseObfuscatedClassAccessor
+
+static NSString *GetIdForAdvertiser() {
+    Class advertisingClass = NSClassFromString(SEGAdvertisingClassIdentifier);
+    if (advertisingClass) {
+        return [[[advertisingClass sharedManager] advertisingIdentifier] UUIDString];
+    } else {
+        return nil;
+    }
+}
+
+#else
+
 static NSString *GetIdForAdvertiser() {
   if ([ASIdentifierManager class]) {
     return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
@@ -59,16 +75,8 @@ static NSString *GetIdForAdvertiser() {
   }
 }
 
-// Test B
-//NSString *const SEGAdvertisingClassIdentifier = @"ASIdentifierManager";
-//static NSString *GetIdForAdvertiser() {
-//    Class advertisingClass = NSClassFromString(SEGAdvertisingClassIdentifier);
-//    if (advertisingClass) {
-//        return [[[advertisingClass sharedManager] advertisingIdentifier] UUIDString];
-//    } else {
-//        return nil;
-//    }
-//}
+#endif
+
 
 
 NSMutableDictionary *__context = nil;
@@ -100,15 +108,19 @@ static NSDictionary *BuildStaticContext() {
     dict[@"model"] = GetDeviceModel();
     dict[@"idfv"] = [[device identifierForVendor] UUIDString];
       
-    // Test A
-    if ([ASIdentifierManager class])
-      dict[@"adTrackingEnabled"] = @([[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]);
+#if kSEGUseObfuscatedClassAccessor
       
-    // Test B
-//    Class advertisingClass = NSClassFromString(SEGAdvertisingClassIdentifier);
-//    if (advertisingClass) {
-//        dict[@"adTrackingEnabled"] = @([[advertisingClass sharedManager] isAdvertisingTrackingEnabled]);
-//    }
+    Class advertisingClass = NSClassFromString(SEGAdvertisingClassIdentifier);
+    if (advertisingClass) {
+        dict[@"adTrackingEnabled"] = @([[advertisingClass sharedManager] isAdvertisingTrackingEnabled]);
+    }
+      
+#else
+    if ([ASIdentifierManager class]) {
+        dict[@"adTrackingEnabled"] = @([[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]);
+    }
+      
+#endif
       
     NSString *idfa = GetIdForAdvertiser();
     if (idfa.length) dict[@"idfa"] = idfa;
