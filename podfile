@@ -1,0 +1,2 @@
+
+pod 'Analytics/Localytics', :inhibit_warnings => true

@@ -1,0 +1,24 @@
+PODS:
+  - Analytics/Core-iOS (1.5.4):
+    - Analytics/Segmentio
+    - TRVSDictionaryWithCaseInsensitivity (= 0.0.2)
+  - Analytics/Localytics (1.5.4):
+    - Analytics/Core-iOS
+    - Localytics-iOS-Client (~> 2.23.0)
+  - Analytics/Segmentio (1.5.4):
+    - Analytics/Core-iOS
+    - Reachability (= 3.1.1)
+  - Localytics-iOS-Client (2.23.0)
+  - Reachability (3.1.1)
+  - TRVSDictionaryWithCaseInsensitivity (0.0.2)
+
+DEPENDENCIES:
+  - Analytics/Localytics
+
+SPEC CHECKSUMS:
+  Analytics: d23de4097032b8bf958d46f6a99e035aa4783079
+  Localytics-iOS-Client: 3f878379d40c67945ea5972c1e1bf9762b5e5b9f
+  Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
+  TRVSDictionaryWithCaseInsensitivity: a61daa8469fa079e05b694f6aad5441785c837d1
+
+COCOAPODS: 0.33.1
