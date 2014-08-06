@@ -4,7 +4,7 @@ This is a demo project to illustrate that the AdSupport Framework is automatical
 
 ### Usage
 
-In `SegmentioIntegration.m` you will find two test cases, marked in commented lines as _Test A_ and _Test B_ respectively. Test A is the default behavior in Segment.io and is uncommented by default. _Test B_ uses the aforementioned anonymous classes and should be uncommented (while commenting out the _Test A_ blocks).
+Direct class access will be used by default. To use obfuscated class access, change line 19 in SegmentioIntegration.m to have a value of 1 rather than 0. 
 
 ### Git and CocoaPods
 
